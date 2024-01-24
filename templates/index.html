@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Driver Drowsiness Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Driver Drowsiness Detection</h1>
+    <form action="/detect" method="post" enctype="multipart/form-data">
+        <label for="image">Select an image:</label>
+        <input type="file" name="image" id="image" accept="image/*" required>
+        <input type="submit" value="Detect Drowsiness">
+    </form>
+
+    {% if result %}
+    <h2>Result: {{ result }}</h2>
+    <!-- Display image or video frame here -->
+    {% if result == "Driver is Sleeping" %}
+    <img src="{{ url_for('static', filename='sleeping_image.jpg') }}" alt="Sleeping Image">
+    {% elif result == "Driver is Awake" %}
+    <img src="{{ url_for('static', filename='awake_image.jpg') }}" alt="Awake Image">
+    {% endif %}
+    {% endif %}
+</body>
+</html>
